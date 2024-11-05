@@ -1,0 +1,26 @@
+import { Box } from "@mui/material";
+import React from "react";
+
+interface Props {
+  value: boolean;
+  handleOnClick:Function;
+}
+
+const Bit = ({value,handleOnClick}:Props) => {
+  return (
+    <Box
+      width={"30px"}
+      height={"30px"}
+      sx={{
+        border: "2px solid black",
+        borderRadius: "100%",
+        backgroundColor: value ? "black" : "transparent",
+      }}
+      onClick={() => {
+        handleOnClick();
+      }}
+    />
+  );
+};
+
+export default Bit;
