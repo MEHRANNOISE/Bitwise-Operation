@@ -1,5 +1,5 @@
 import { Stack, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Byte from "./Byte";
 import { AndOperation, NotOperation, OrOperation, XorOperation } from "./operations";
 
@@ -14,8 +14,19 @@ const App = () => {
   const [input1, setInput1] = useState<boolean[]>(Array(8).fill(false));
   const [input2, setInput2] = useState<boolean[]>(Array(8).fill(false));
   const [result, setResult] = useState<boolean[]>(Array(8).fill(false));
-  const [operations, setOperation] = useState<Operation>({And : false,Or : false , Xor:false, Not:false});
+  const [operations, setOperation] = useState<Operation>({And : true,Or : false , Xor:false, Not:false});
 
+  useEffect(()=>{
+    if(operations.And === true)
+      AndOperation(input1, input2, result, setResult);
+    else if(operations.Or)
+      OrOperation(input1, input2, result, setResult);
+    else if(operations.Xor)
+      XorOperation(input1, input2, result, setResult);
+    else
+      NotOperation(input1, result, setResult);
+
+  })
 
   return (
     <>
@@ -50,7 +61,6 @@ const App = () => {
                 }}
                 onClick={() => {
                   setOperation({And : true ,Or : false , Xor:false, Not:false})
-                  AndOperation(input1, input2, result, setResult);
                 }}
               >
                 AND
@@ -62,7 +72,6 @@ const App = () => {
                 variant="body1"
                 onClick={() => {
                   setOperation({And : false,Or : true , Xor:false, Not:false})
-                  OrOperation(input1, input2, result, setResult);
                 }}
               >
                 OR
@@ -74,7 +83,6 @@ const App = () => {
                 variant="body1"
                 onClick={() => {
                   setOperation({And : false,Or : false , Xor:true, Not:false})
-                  XorOperation(input1, input2, result, setResult);
                 }}
               >
                 XOR
@@ -86,7 +94,6 @@ const App = () => {
                 variant="body1"
                 onClick={() => {
                   setOperation({And : false,Or : false , Xor:false, Not:true})
-                  NotOperation(input1, result, setResult)
                 }}
               >
                 NOT
