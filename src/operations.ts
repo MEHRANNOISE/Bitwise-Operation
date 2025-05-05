@@ -2,55 +2,32 @@ export const AndOperation = (
   input1: boolean[],
   input2: boolean[],
   result: boolean[],
-  setResult: Function
+  setResult: (newResult: boolean[]) => void
 ) => {
-  setResult(
-    result.map((res, i) => {
-      return input1[i] === input2[i] && input1[i] === true
-        ? (res = true)
-        : (res = false);
-    })
-  );
+  setResult(result.map((_, i) => input1[i] && input2[i]));
 };
 export const OrOperation = (
   input1: boolean[],
   input2: boolean[],
   result: boolean[],
-  setResult: Function
+  setResult: (newResult: boolean[]) => void
 ) => {
-  setResult(
-    result.map((res, i) => {
-      return input1[i] === true || input2[i] === true
-        ? (res = true)
-        : (res = false);
-    })
-  );
+  setResult(result.map((_, i) => input1[i] || input2[i]));
 };
 export const XorOperation = (
   input1: boolean[],
   input2: boolean[],
   result: boolean[],
-  setResult: Function
+  setResult: (newResult: boolean[]) => void
 ) => {
   setResult(
-    result.map((res, i) => {
-      return (input1[i] === true || input2[i] === true) &&
-        input1[i] != input2[i]
-        ? (res = true)
-        : (res = false);
-    })
+    result.map((_, i) => (input1[i] || input2[i]) && input1[i] != input2[i])
   );
 };
 export const NotOperation = (
   input1: boolean[],
   result: boolean[],
-  setResult: Function
+  setResult: (newResult: boolean[]) => void
 ) => {
-  setResult(
-    result.map((res, i) => {
-      return input1[i] === true 
-        ? (res = false)
-        : (res = true);
-    })
-  );
+  setResult(result.map((_, i) => !input1[i]));
 };
