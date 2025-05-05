@@ -1,37 +1,45 @@
 import { Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import Byte from "./Byte";
-import { AndOperation, NotOperation, OrOperation, XorOperation } from "./operations";
+import {
+  AndOperation,
+  NotOperation,
+  OrOperation,
+  XorOperation,
+} from "./operations";
 
-interface Operation{
-  And:boolean;
-  Or:boolean;
-  Xor:boolean;
-  Not:boolean;
+interface Operation {
+  And: boolean;
+  Or: boolean;
+  Xor: boolean;
+  Not: boolean;
 }
 
 const App = () => {
   const [input1, setInput1] = useState<boolean[]>(Array(8).fill(false));
   const [input2, setInput2] = useState<boolean[]>(Array(8).fill(false));
   const [result, setResult] = useState<boolean[]>(Array(8).fill(false));
-  const [operations, setOperation] = useState<Operation>({And : true,Or : false , Xor:false, Not:false});
+  const [operations, setOperation] = useState<Operation>({
+    And: true,
+    Or: false,
+    Xor: false,
+    Not: false,
+  });
 
-  useEffect(()=>{
-    if(operations.And === true)
+  useEffect(() => {
+    if (operations.And === true)
       AndOperation(input1, input2, result, setResult);
-    else if(operations.Or)
-      OrOperation(input1, input2, result, setResult);
-    else if(operations.Xor)
-      XorOperation(input1, input2, result, setResult);
-    else
-      NotOperation(input1, result, setResult);
-
-  })
+    else if (operations.Or) OrOperation(input1, input2, result, setResult);
+    else if (operations.Xor) XorOperation(input1, input2, result, setResult);
+    else NotOperation(input1, result, setResult);
+  }, [input1, input2, operations, result]);
 
   return (
     <>
       <Stack padding={3} alignItems={"center"} height={"100vh"}>
-        <Typography variant="h3">Bitwise Operation</Typography>
+        <Typography sx={{ userSelect: "none" }} variant="h3">
+          Bitwise Operation
+        </Typography>
         <Stack
           margin={5}
           width={"100%"}
@@ -44,23 +52,40 @@ const App = () => {
           }}
         >
           <Stack gap={3} alignItems={"center"}>
-            <Typography variant="body1">input 1</Typography>
+            <Typography sx={{ userSelect: "none" }} variant="body1">
+              input 1
+            </Typography>
             <Byte update={setInput1} values={input1} />
           </Stack>
           <Stack gap={3} alignItems={"center"}>
-            <Typography variant="body1">input 2</Typography>
-            <Byte update={setInput2} values={input2} disabled={operations.Not} />
+            <Typography sx={{ userSelect: "none" }} variant="body1">
+              input 2
+            </Typography>
+            <Byte
+              update={setInput2}
+              values={input2}
+              disabled={operations.Not}
+            />
           </Stack>
           <Stack gap={3} alignItems={"center"}>
-            <Typography variant="body1">Operation</Typography>
+            <Typography sx={{ userSelect: "none" }} variant="body1">
+              Operation
+            </Typography>
             <Stack direction={"row"} gap={3} marginTop={1}>
               <Typography
                 variant="body1"
                 sx={{
                   textDecoration: operations.And ? "underline black" : "none",
+                  cursor: "pointer",
+                  userSelect: "none",
                 }}
                 onClick={() => {
-                  setOperation({And : true ,Or : false , Xor:false, Not:false})
+                  setOperation({
+                    And: true,
+                    Or: false,
+                    Xor: false,
+                    Not: false,
+                  });
                 }}
               >
                 AND
@@ -68,10 +93,17 @@ const App = () => {
               <Typography
                 sx={{
                   textDecoration: operations.Or ? "underline black" : "none",
+                  cursor: "pointer",
+                  userSelect: "none",
                 }}
                 variant="body1"
                 onClick={() => {
-                  setOperation({And : false,Or : true , Xor:false, Not:false})
+                  setOperation({
+                    And: false,
+                    Or: true,
+                    Xor: false,
+                    Not: false,
+                  });
                 }}
               >
                 OR
@@ -79,10 +111,17 @@ const App = () => {
               <Typography
                 sx={{
                   textDecoration: operations.Xor ? "underline black" : "none",
+                  cursor: "pointer",
+                  userSelect: "none",
                 }}
                 variant="body1"
                 onClick={() => {
-                  setOperation({And : false,Or : false , Xor:true, Not:false})
+                  setOperation({
+                    And: false,
+                    Or: false,
+                    Xor: true,
+                    Not: false,
+                  });
                 }}
               >
                 XOR
@@ -90,10 +129,17 @@ const App = () => {
               <Typography
                 sx={{
                   textDecoration: operations.Not ? "underline black" : "none",
+                  cursor: "pointer",
+                  userSelect: "none",
                 }}
                 variant="body1"
                 onClick={() => {
-                  setOperation({And : false,Or : false , Xor:false, Not:true})
+                  setOperation({
+                    And: false,
+                    Or: false,
+                    Xor: false,
+                    Not: true,
+                  });
                 }}
               >
                 NOT
@@ -101,7 +147,9 @@ const App = () => {
             </Stack>
           </Stack>
           <Stack gap={3} alignItems={"center"}>
-            <Typography variant="body1">result</Typography>
+            <Typography sx={{ userSelect: "none" }} variant="body1">
+              result
+            </Typography>
             <Byte values={result} />
           </Stack>
         </Stack>

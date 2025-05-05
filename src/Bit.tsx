@@ -2,10 +2,10 @@ import { Box } from "@mui/material";
 
 interface Props {
   value: boolean;
-  handleOnClick:Function;
+  handleOnClick: () => void;
 }
 
-const Bit = ({value,handleOnClick}:Props) => {
+const Bit = ({ value, handleOnClick }: Props) => {
   return (
     <Box
       width={"30px"}
@@ -14,6 +14,7 @@ const Bit = ({value,handleOnClick}:Props) => {
         border: "2px solid black",
         borderRadius: "100%",
         backgroundColor: value ? "black" : "transparent",
+        userSelect: "none",
       }}
       onClick={() => {
         handleOnClick();

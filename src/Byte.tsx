@@ -3,11 +3,11 @@ import Bit from "./Bit";
 
 interface Props {
   values: boolean[];
-  update?: Function;
+  update?: (newValues: boolean[]) => void;
   disabled?: boolean;
 }
 
-const Byte = ({ values, update = Function, disabled }: Props) => {
+const Byte = ({ values, update = () => {}, disabled }: Props) => {
   return (
     <>
       <Stack
